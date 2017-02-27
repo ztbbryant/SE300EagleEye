@@ -22,7 +22,7 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         System.out.println("HELLO WORLD");
-
+///jameslarger
         assertEquals("com.example.zacharybryant.eagleeyeapp", appContext.getPackageName());
     }
 }
