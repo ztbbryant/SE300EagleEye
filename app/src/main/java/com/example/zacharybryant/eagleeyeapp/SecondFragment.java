@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;import com.example.user.navigationdrawer.R;
+import android.view.ViewGroup;
+import com.example.user.navigationdrawer.R;
 
 /**
  * Created by user on 12/31/15.
