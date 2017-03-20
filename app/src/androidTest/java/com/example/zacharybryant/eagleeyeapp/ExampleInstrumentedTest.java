@@ -23,6 +23,7 @@ public class ExampleInstrumentedTest {
 
         System.out.println("HELLO WORLD");
 ///jameslarger
+        /// yes
         assertEquals("com.example.zacharybryant.eagleeyeapp", appContext.getPackageName());
     }
 }
