@@ -1,5 +1,11 @@
-package com.example.zacharybryant.eagleeyeapp; /**
- * Created by jameslarger on 3/5/17.
+package com.example.zacharybryant.eagleeyeapp;
+/**
+ * @author James Larger
+ * @version 1.0
+ *
+ * This class is meant to deal with pre-loading all the buildings, resources, and food services
+ * into the database.
+ *
  */
 
 
@@ -16,61 +22,92 @@ import com.example.zacharybryant.eagleeyeapp.Buildings;
 public class DatabaseCommunication extends SQLiteOpenHelper
 {
 
-    /*
-        Still need to initialize database in MainActivity, but my Studio's Gradle is messing up.
-        Will finish off tomorrow during meeting.
-     */
-
     private static final String databaseName = "OverallResources.db";
     private static final String buildingColumn_ID = "buildings";
     private static final String resourceColumn_ID = "resources";
     private static final String foodServices_ID = "food services";
 
+
+    /**
+     *
+     * @param context -- context of the database description
+     * @param name -- name of database
+     * @param factory -- able to open stream
+     * @param version -- version the database is
+     */
     public DatabaseCommunication(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
 
-    /*
+    /**
         This method creates and sets up the database
      */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
 
-        /*
-            databaseName is obv name of database, ID's are the names of the columns, TEXT indicates that it is a text field
-
+        /**
+            databaseName is obviously name of database, ID's are the names of the columns, TEXT indicates that it is a text field
+            @return nothing
+            @param SQLITE Database
          */
         String createTable = "create Table" + databaseName + "(" + buildingColumn_ID + "TEXT," + resourceColumn_ID + "TEXT,"
                 + foodServices_ID + "TEXT," + ")";
 
 
-        //create table
+        /**
+         *  create table
+         */
         db.execSQL(createTable);
 
-        // inserting buildings, resources, and food services
+        /**
+         * inserting buildings, resources, and food services
+         */
+
         addBuildings(db);
         addResources(db);
         addFoodServices(db);
     }
 
-    /*
+    /**
         This method is used in case a greater database version number than the previous one used
+
+     */
+
+    /**
+     *
+     * @param centralDatabase -- database we are checking version
+     * @param oldVersion -- old version of database
+     * @param newVersion -- next version available
      */
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    public void onUpgrade(SQLiteDatabase centralDatabase, int oldVersion, int newVersion)
     {
-        db.execSQL("Delete Table" + db);
-        onCreate(db);
+
+
+        centralDatabase.execSQL("Delete Table" + centralDatabase);
+        onCreate(centralDatabase);
     }
 
 
-    // adding buildings to building category in database
+    /**
+     *  adding buildings to building category in database
+     */
+
+
+     /**
+     *
+     * @param centralDatabase -- central database we are working with to add all buildings on campus
+     *
+     *
+     */
     private void addBuildings(SQLiteDatabase centralDatabase)
     {
+
+
         ContentValues buildingValues = new ContentValues();
-        /*
+        /**
             The "id's" in adding to the database are the "categories", or columns, of the database.
             Basically one has to specify which column that it belongs to.
          */
@@ -135,9 +172,18 @@ public class DatabaseCommunication extends SQLiteOpenHelper
         centralDatabase.insert(buildingColumn_ID, null, buildingValues);
         centralDatabase.close();
     }
-    // adding resources to resource category in database
+
+
+    /**
+     *   adding resources to resource category in database
+     *   @param centralDatabase -- this is the database that was created above, and passing it
+     *                          to add resources
+     *
+     */
     private void addResources(SQLiteDatabase centralDatabase)
     {
+
+
         ContentValues resourceValues = new ContentValues();
 
         resourceValues.put(resourceColumn_ID, "Honors Program");
@@ -179,9 +225,18 @@ public class DatabaseCommunication extends SQLiteOpenHelper
         centralDatabase.insert(resourceColumn_ID, null, resourceValues);
         centralDatabase.close();
     }
-    // adding content to food services category
+
+
+
     private void addFoodServices(SQLiteDatabase centralDatabase)
     {
+
+        /**
+         *  adding content to food services category for the central database.
+         *
+         * @param centralDatabase -- passing the database created above that so it can add food services
+         * @return nothing
+         */
         ContentValues foodServiceValues = new ContentValues();
 
         foodServiceValues.put(foodServices_ID, "Einstein Bros Bagels");
