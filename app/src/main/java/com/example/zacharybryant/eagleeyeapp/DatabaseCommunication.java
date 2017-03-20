@@ -4,6 +4,7 @@ package com.example.zacharybryant.eagleeyeapp; /**
 
 
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
@@ -25,10 +26,14 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     private static final String resourceColumn_ID = "resources";
     private static final String foodServices_ID = "food services";
 
+    public DatabaseCommunication(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
 
-/*
-    This method creates and sets up the database
- */
+
+    /*
+        This method creates and sets up the database
+     */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
