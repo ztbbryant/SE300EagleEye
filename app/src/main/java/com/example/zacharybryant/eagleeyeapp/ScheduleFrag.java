@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 
 /**
- * Custom {@link Fragment} that displays list of events on campus
+ * Custom fragment that displays events on campus
  * @author Shawn
  * @version 1.0
  */
@@ -24,11 +24,13 @@ public class scheduleFrag extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_schedule, container, false);
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -43,6 +45,7 @@ public class scheduleFrag extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

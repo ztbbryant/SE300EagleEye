@@ -13,6 +13,7 @@ import android.view.MenuItem;
  * Main activity for the application
  * @author Shawn
  * @version 1.0
+
  */
 public class MainActivity extends AppCompatActivity {
 
