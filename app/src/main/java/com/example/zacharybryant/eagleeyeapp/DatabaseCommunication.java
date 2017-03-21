@@ -1,11 +1,9 @@
 package com.example.zacharybryant.eagleeyeapp;
 /**
- * @author James Larger
- * @version 1.0
- *
  * This class is meant to deal with pre-loading all the buildings, resources, and food services
  * into the database.
- *
+ * @author James Larger
+ * @version 1.0
  */
 
 

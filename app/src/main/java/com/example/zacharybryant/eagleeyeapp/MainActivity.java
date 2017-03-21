@@ -9,12 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+/**
+ * Main activity for the application
+ * @author Shawn
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
 
-
+    /**
+    * Listener to change active fragment
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -55,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    /**
+     * Sets up main activity, starting on the list fragment.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mOnNavigationItemSelectedListener.onNavigationItemSelected(mBottomNav.getMenu().getItem(0));
+        mBottomNav.getMenu().getItem(0).setChecked(true);
     }
 
 }
