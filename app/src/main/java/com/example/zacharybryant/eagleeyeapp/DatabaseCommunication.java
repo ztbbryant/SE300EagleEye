@@ -28,7 +28,7 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     private static final String foodServices_ID = "food services";
 
 
-    /**
+     /**
      *
      * @param context -- context of the database description
      * @param name -- name of database
@@ -40,7 +40,7 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     }
 
 
-    /**
+     /**
         This method creates and sets up the database
      */
     @Override
@@ -92,25 +92,16 @@ public class DatabaseCommunication extends SQLiteOpenHelper
 
 
     /**
-     *  adding buildings to building category in database
-     */
-
-
-     /**
-     *
-     * @param centralDatabase -- central database we are working with to add all buildings on campus
-     *
-     *
+     * @param centralDatabase -- -- central database we are working with to add all buildings on campus.
+     *      The "id's" in adding to the database are the "categories", or columns, of the database.
+     *      Basically one has to specify which column that it belongs to.
      */
     private void addBuildings(SQLiteDatabase centralDatabase)
     {
 
 
         ContentValues buildingValues = new ContentValues();
-        /**
-            The "id's" in adding to the database are the "categories", or columns, of the database.
-            Basically one has to specify which column that it belongs to.
-         */
+
         buildingValues.put(buildingColumn_ID, "Corsair Hall");
         buildingValues.put(buildingColumn_ID, "North Chiller");
         buildingValues.put(buildingColumn_ID, "Residence Hall");
@@ -178,7 +169,6 @@ public class DatabaseCommunication extends SQLiteOpenHelper
      *   adding resources to resource category in database
      *   @param centralDatabase -- this is the database that was created above, and passing it
      *                          to add resources
-     *
      */
     private void addResources(SQLiteDatabase centralDatabase)
     {
