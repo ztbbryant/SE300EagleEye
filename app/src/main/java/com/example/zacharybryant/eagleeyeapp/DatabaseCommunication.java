@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import java.util.List;
 import java.util.ArrayList;
-import com.example.zacharybryant.eagleeyeapp.Buildings;
+
 
 
 public class DatabaseCommunication extends SQLiteOpenHelper
