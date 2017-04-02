@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ListFrag();
                     break;
                 case R.id.navigation_dashboard:
-                    fragment = new scheduleFrag();
+                    fragment = new ScheduleFrag();
                     break;
                 case R.id.navigation_notifications:
                     break;

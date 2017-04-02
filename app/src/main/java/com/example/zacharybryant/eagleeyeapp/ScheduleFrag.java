@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * @author Shawn
  * @version 1.0
  */
-public class scheduleFrag extends Fragment {
+public class ScheduleFrag extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
