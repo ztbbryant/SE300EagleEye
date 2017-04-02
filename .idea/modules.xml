@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EagleEyeApp.iml" filepath="$PROJECT_DIR$/EagleEyeApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SE300EagleEye.iml" filepath="$PROJECT_DIR$/SE300EagleEye.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

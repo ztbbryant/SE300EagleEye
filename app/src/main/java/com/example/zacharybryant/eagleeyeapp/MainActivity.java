@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     fragment = new ListFrag();
                     break;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_schedule:
                     fragment = new ScheduleFrag();
                     break;
-                case R.id.navigation_notifications:
+                case R.id.navigation_faq:
                     break;
             }
 
