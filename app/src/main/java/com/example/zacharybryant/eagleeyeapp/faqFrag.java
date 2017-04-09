@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by marce on 4/2/2017.
+ * Created by marcell on 4/2/2017.
  */
 
 public class faqFrag extends Fragment {}
