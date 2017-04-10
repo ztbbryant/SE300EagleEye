@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 public class faqFrag extends Fragment {
 
+    private ScheduleFrag.OnFragmentInteractionListener mListener;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,4 +26,9 @@ public class faqFrag extends Fragment {
         return inflater.inflate(R.layout.fragment_faq, container, false);
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 }
