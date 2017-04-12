@@ -12,6 +12,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,10 +25,14 @@ import java.util.ArrayList;
 public class DatabaseCommunication extends SQLiteOpenHelper
 {
 
-    private static final String databaseName = "OverallResources.db";
+    private static final String databaseName = "OverallResources";
     private static final String buildingColumn_ID = "buildings";
     private static final String resourceColumn_ID = "resources";
-    private static final String foodServices_ID = "food services";
+    private static final String foodServices_ID = "food_services";
+
+    private static final String CREATE_TABLE_BUILDINGS = "CREATE TABLE BUILDINGS (NAME CHAR(50) PRIMARY KEY, DESCRIPTION CHAR(1500), LAT CHAR(10), LON CHAR(10))";
+    private static final String CREATE_TABLE_RESOURCES = "CREATE TABLE RESOURCES (NAME CHAR(50) PRIMARY KEY, DESCRIPTION CHAR(1500), LAT CHAR(10), LON CHAR(10))";
+    private static final String CREATE_TABLE_FOOD = "CREATE TABLE FOOD (NAME CHAR(50) PRIMARY KEY, DESCRIPTION CHAR(1500), LAT CHAR(10), LON CHAR(10))";
 
 
      /**
@@ -50,22 +59,24 @@ public class DatabaseCommunication extends SQLiteOpenHelper
             @return nothing
             @param SQLITE Database
          */
-        String createTable = "create Table" + databaseName + "(" + buildingColumn_ID + "TEXT," + resourceColumn_ID + "TEXT,"
-                + foodServices_ID + "TEXT," + ")";
+        String createTable = "CREATE TABLE " + databaseName + "(" + buildingColumn_ID + " TEXT," + resourceColumn_ID + " TEXT,"
+                + foodServices_ID + " TEXT);";
 
 
         /**
          *  create table
          */
-        db.execSQL(createTable);
+        db.execSQL(CREATE_TABLE_BUILDINGS);
+        db.execSQL(CREATE_TABLE_RESOURCES);
+        db.execSQL(CREATE_TABLE_FOOD);
 
         /**
          * inserting buildings, resources, and food services
          */
 
         addBuildings(db);
-        addResources(db);
-        addFoodServices(db);
+        //addResources(db);
+        //addFoodServices(db);
     }
 
     /**
@@ -84,7 +95,9 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     {
 
 
-        centralDatabase.execSQL("Delete Table" + centralDatabase);
+        centralDatabase.execSQL("DROP TABLE IF EXISTS BUILDINGS");
+        centralDatabase.execSQL("DROP TABLE IF EXISTS RESOURCES");
+        centralDatabase.execSQL("DROP TABLE IF EXISTS FOOD");
         onCreate(centralDatabase);
     }
 
@@ -100,66 +113,78 @@ public class DatabaseCommunication extends SQLiteOpenHelper
 
         ContentValues buildingValues = new ContentValues();
 
-        buildingValues.put(buildingColumn_ID, "Corsair Hall");
-        buildingValues.put(buildingColumn_ID, "North Chiller");
-        buildingValues.put(buildingColumn_ID, "Residence Hall");
-        buildingValues.put(buildingColumn_ID, "Campus Safety");
-        buildingValues.put(buildingColumn_ID, "Apollo Hall");
-        buildingValues.put(buildingColumn_ID, "Doolittle Hall");
-        buildingValues.put(buildingColumn_ID, "Bookstore");
-        buildingValues.put(buildingColumn_ID, "Mail Services");
-        buildingValues.put(buildingColumn_ID, "Undergraduate Research and Disability Services");
-        buildingValues.put(buildingColumn_ID, "Tine Davis Fitness Center");
-        buildingValues.put(buildingColumn_ID, "Student Financial Services");
-        buildingValues.put(buildingColumn_ID, "Center For Faith and Spirituality");
-        buildingValues.put(buildingColumn_ID, "Racquetball Court");
-        buildingValues.put(buildingColumn_ID, "Student Support Services and Honors Program");
-        buildingValues.put(buildingColumn_ID, "Advanced Flight Sim Center");
-        buildingValues.put(buildingColumn_ID, "Fleet Maintenance Hangar");
-        buildingValues.put(buildingColumn_ID, "Flight Operations");
-        buildingValues.put(buildingColumn_ID, "College of Business");
-        buildingValues.put(buildingColumn_ID, "Willie Miller Instructional Center");
-        buildingValues.put(buildingColumn_ID, "Aviation Maintenance Sciences");
-        buildingValues.put(buildingColumn_ID, "College of Aviation");
-        buildingValues.put(buildingColumn_ID, "AMS Hangar");
-        buildingValues.put(buildingColumn_ID, "Test Cell I");
-        buildingValues.put(buildingColumn_ID, "Engine Test Cells");
-        buildingValues.put(buildingColumn_ID, "Canaveral Hall");
-        buildingValues.put(buildingColumn_ID, "College of Arts and Sciences");
-        buildingValues.put(buildingColumn_ID, "Wellness Center - HDS");
-        buildingValues.put(buildingColumn_ID, "ROTC Center");
-        buildingValues.put(buildingColumn_ID, "Wellness Center - Counseling");
-        buildingValues.put(buildingColumn_ID, "Print Shop");
-        buildingValues.put(buildingColumn_ID, "Veteran's Affairs");
-        buildingValues.put(buildingColumn_ID, "Eagle Alumni Center");
-        buildingValues.put(buildingColumn_ID, "Crotty Tennis Complex");
-        buildingValues.put(buildingColumn_ID, "Modular Building - Telescope");
-        buildingValues.put(buildingColumn_ID, "Track and Field Concession");
-        buildingValues.put(buildingColumn_ID, "Track and Field Bleaches");
-        buildingValues.put(buildingColumn_ID, "ROTC Obstacle Course");
-        buildingValues.put(buildingColumn_ID, "Multipurpose Artificial Turf Field");
-        buildingValues.put(buildingColumn_ID, "Baseball/Softball Clubhouse");
-        buildingValues.put(buildingColumn_ID, "JPR Student Center & Admissions Visitor Center");
-        buildingValues.put(buildingColumn_ID, "ICI Center");
-        buildingValues.put(buildingColumn_ID, "Jim W Henderson Administration and Welcome Center");
-        buildingValues.put(buildingColumn_ID, "Sliwa Stadium");
-        buildingValues.put(buildingColumn_ID, "Soccer - Ticket Concessions");
-        buildingValues.put(buildingColumn_ID, "Soccer Field Bleachers");
-        buildingValues.put(buildingColumn_ID, "Student Union (Under Construction)");
-        buildingValues.put(buildingColumn_ID, "Lehman College of Engineering");
-        buildingValues.put(buildingColumn_ID, "South Chiller");
-        buildingValues.put(buildingColumn_ID, "Admissions Operations");
-        buildingValues.put(buildingColumn_ID, "Engineering Special Projects and Labs");
-        buildingValues.put(buildingColumn_ID, "Clyde Morris Multipurpose Field");
-        buildingValues.put(buildingColumn_ID, "Student Village (Adams, Wood, Tallman Commons");
-        buildingValues.put(buildingColumn_ID, "Student Village (O'Connor, Stimpson)");
-        buildingValues.put(buildingColumn_ID, "Richard Petty Multipurpose West Field");
-        buildingValues.put(buildingColumn_ID, "Richard Petty Multipurpose East Field");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(MainActivity.context.getResources().openRawResource(R.raw.database)));
+        String buffer;
+        try{
+            while ((buffer=reader.readLine())!=null){
+                buildingValues.put("NAME",buffer);
+                buildingValues.put("DESCRIPTION", reader.readLine());
+                buildingValues.put("LAT",reader.readLine());
+                buildingValues.put("LON",reader.readLine());
+                centralDatabase.insert("BUILDINGS",null,buildingValues);
+            }
+        } catch(IOException e){}
 
-        centralDatabase = this.getWritableDatabase();
+//        buildingValues.put(buildingColumn_ID, "Corsair Hall");
+//        buildingValues.put(buildingColumn_ID, "North Chiller");
+//        buildingValues.put(buildingColumn_ID, "Residence Hall");
+//        buildingValues.put(buildingColumn_ID, "Campus Safety");
+//        buildingValues.put(buildingColumn_ID, "Apollo Hall");
+//        buildingValues.put(buildingColumn_ID, "Doolittle Hall");
+//        buildingValues.put(buildingColumn_ID, "Bookstore");
+//        buildingValues.put(buildingColumn_ID, "Mail Services");
+//        buildingValues.put(buildingColumn_ID, "Undergraduate Research and Disability Services");
+//        buildingValues.put(buildingColumn_ID, "Tine Davis Fitness Center");
+//        buildingValues.put(buildingColumn_ID, "Student Financial Services");
+//        buildingValues.put(buildingColumn_ID, "Center For Faith and Spirituality");
+//        buildingValues.put(buildingColumn_ID, "Racquetball Court");
+//        buildingValues.put(buildingColumn_ID, "Student Support Services and Honors Program");
+//        buildingValues.put(buildingColumn_ID, "Advanced Flight Sim Center");
+//        buildingValues.put(buildingColumn_ID, "Fleet Maintenance Hangar");
+//        buildingValues.put(buildingColumn_ID, "Flight Operations");
+//        buildingValues.put(buildingColumn_ID, "College of Business");
+//        buildingValues.put(buildingColumn_ID, "Willie Miller Instructional Center");
+//        buildingValues.put(buildingColumn_ID, "Aviation Maintenance Sciences");
+//        buildingValues.put(buildingColumn_ID, "College of Aviation");
+//        buildingValues.put(buildingColumn_ID, "AMS Hangar");
+//        buildingValues.put(buildingColumn_ID, "Test Cell I");
+//        buildingValues.put(buildingColumn_ID, "Engine Test Cells");
+//        buildingValues.put(buildingColumn_ID, "Canaveral Hall");
+//        buildingValues.put(buildingColumn_ID, "College of Arts and Sciences");
+//        buildingValues.put(buildingColumn_ID, "Wellness Center - HDS");
+//        buildingValues.put(buildingColumn_ID, "ROTC Center");
+//        buildingValues.put(buildingColumn_ID, "Wellness Center - Counseling");
+//        buildingValues.put(buildingColumn_ID, "Print Shop");
+//        buildingValues.put(buildingColumn_ID, "Veteran's Affairs");
+//        buildingValues.put(buildingColumn_ID, "Eagle Alumni Center");
+//        buildingValues.put(buildingColumn_ID, "Crotty Tennis Complex");
+//        buildingValues.put(buildingColumn_ID, "Modular Building - Telescope");
+//        buildingValues.put(buildingColumn_ID, "Track and Field Concession");
+//        buildingValues.put(buildingColumn_ID, "Track and Field Bleaches");
+//        buildingValues.put(buildingColumn_ID, "ROTC Obstacle Course");
+//        buildingValues.put(buildingColumn_ID, "Multipurpose Artificial Turf Field");
+//        buildingValues.put(buildingColumn_ID, "Baseball/Softball Clubhouse");
+//        buildingValues.put(buildingColumn_ID, "JPR Student Center & Admissions Visitor Center");
+//        buildingValues.put(buildingColumn_ID, "ICI Center");
+//        buildingValues.put(buildingColumn_ID, "Jim W Henderson Administration and Welcome Center");
+//        buildingValues.put(buildingColumn_ID, "Sliwa Stadium");
+//        buildingValues.put(buildingColumn_ID, "Soccer - Ticket Concessions");
+//        buildingValues.put(buildingColumn_ID, "Soccer Field Bleachers");
+//        buildingValues.put(buildingColumn_ID, "Student Union (Under Construction)");
+//        buildingValues.put(buildingColumn_ID, "Lehman College of Engineering");
+//        buildingValues.put(buildingColumn_ID, "South Chiller");
+//        buildingValues.put(buildingColumn_ID, "Admissions Operations");
+//        buildingValues.put(buildingColumn_ID, "Engineering Special Projects and Labs");
+//        buildingValues.put(buildingColumn_ID, "Clyde Morris Multipurpose Field");
+//        buildingValues.put(buildingColumn_ID, "Student Village (Adams, Wood, Tallman Commons");
+//        buildingValues.put(buildingColumn_ID, "Student Village (O'Connor, Stimpson)");
+//        buildingValues.put(buildingColumn_ID, "Richard Petty Multipurpose West Field");
+//        buildingValues.put(buildingColumn_ID, "Richard Petty Multipurpose East Field");
 
-        centralDatabase.insert(buildingColumn_ID, null, buildingValues);
-        centralDatabase.close();
+        //centralDatabase = this.getWritableDatabase();
+
+        //centralDatabase.insert(buildingColumn_ID, null, buildingValues);
+        //centralDatabase.close();
     }
 
 

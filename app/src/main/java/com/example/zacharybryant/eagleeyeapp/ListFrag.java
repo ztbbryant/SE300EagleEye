@@ -1,14 +1,21 @@
 package com.example.zacharybryant.eagleeyeapp;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.android.gms.maps.MapFragment;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 
 /**
@@ -39,9 +46,19 @@ public class ListFrag extends Fragment {
         }
         try {
             view = inflater.inflate(R.layout.fragment_list, container, false);
-        } catch (InflateException e) {
-        /* map is already there, just return view as it is */
-        }
+        } catch (InflateException e) {}
+
+
+        ListView lv = (ListView) getActivity().findViewById(R.id.listView);
+        Activity a = getActivity();
+        Log.d("LV","Test");
+//        ArrayList<String> array = new ArrayList<>();
+//        array.add("Test1");
+//        array.add("Test2");
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.fragment_list,R.id.listView,array);
+//        lv.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+
         return view;
     }
 
