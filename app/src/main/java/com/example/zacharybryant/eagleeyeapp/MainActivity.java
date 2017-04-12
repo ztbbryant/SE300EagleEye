@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ListFrag();
                     break;
                 case R.id.navigation_schedule:
-                    fragment = new ScheduleFrag();
+                    fragment = new scheduleFrag();
                     break;
                 case R.id.navigation_faq:
                     fragment = new faqFrag();

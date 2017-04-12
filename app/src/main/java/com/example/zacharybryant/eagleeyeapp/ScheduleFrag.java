@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * @author Shawn
  * @version 1.0
  */
-public class ScheduleFrag extends Fragment {
+public class scheduleFrag extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,7 +35,6 @@ public class ScheduleFrag extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
 
     @Override
     public void onDetach() {
