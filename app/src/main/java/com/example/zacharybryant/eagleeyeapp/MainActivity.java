@@ -1,5 +1,8 @@
 package com.example.zacharybryant.eagleeyeapp;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -19,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
+    private DatabaseCommunication databaseCommunication;
+    private SQLiteDatabase db;
+    static Context context;
 
     /**
     * Listener to change active fragment
@@ -46,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             mSelectedItem = item.getItemId();
-
             for(int i=0;i<mBottomNav.getMenu().size();i++){
                 MenuItem menuItem = mBottomNav.getMenu().getItem(i);
                 menuItem.setChecked(menuItem.getItemId() == item.getItemId());
@@ -70,7 +75,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_main);
+        databaseCommunication = new DatabaseCommunication(this,"Database",null,1);
+        db = databaseCommunication.getReadableDatabase();
+        Log.d("DB",db.toString());
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

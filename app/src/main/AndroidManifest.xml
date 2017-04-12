@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zacharybryant.eagleeyeapp">
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -12,25 +11,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:allowBackup="true" android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name" android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="EagleEye">
+            android:name="com.example.zacharybryant.eagleeyeapp.MainActivity"
+            android:label="EagleEye" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
-            android:name="com.google.android.geo.API_Key"
-            android:value="AIzaSyARuFUqfB-oWKTWMDgvbaXoMIxxEMxOBSY" />
-
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCkC9D-0veWcK_tWMDQhNTMbxChSV-WW_0"/>
     </application>
-
 </manifest>
