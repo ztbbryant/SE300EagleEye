@@ -3,14 +3,28 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:id="@+id/fragment_schedule"
-tools:context="com.example.zacharybryant.eagleeyeapp.ScheduleFrag">
+android:id="@+id/fragment_faq"
+tools:context="com.example.zacharybryant.eagleeyeapp.faqFrag">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Frequently Asked Questions"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:paddingTop="30dp"
         android:fillViewport="false">
 
         <LinearLayout
@@ -18,21 +32,15 @@ tools:context="com.example.zacharybryant.eagleeyeapp.ScheduleFrag">
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Frequently Asked Questions"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <ExpandableListView
+                android:id="@+id/questExpand"
+                android:layout_width="match_parent"
+                android:layout_height="486dp">
 
-            <!-- FAQ Information in Text View below-->
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/large_text"
-                 />
-
+                <!-- Feel free to remove subQuestExpand list below -->
+<!--
+                    -->
+            </ExpandableListView>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
