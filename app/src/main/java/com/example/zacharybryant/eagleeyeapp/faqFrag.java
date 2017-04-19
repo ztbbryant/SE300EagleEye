@@ -19,8 +19,8 @@ public class faqFrag extends Fragment {
     View rootView;
     ExpandableListView lv;
     private String[] groups;
-    private String[][] sub_groups;
-    private String[] children;
+    private String[][] children;
+    private String[][][] answers;
     //the child class is acually a 2d string
 
 
@@ -31,20 +31,37 @@ public class faqFrag extends Fragment {
                                 "University FAQs",
                                 "International Student FAQ"};
 
-        children = new String[]{ "What are your admissions criteria?",
-                                    "When should I apply for admission?",
-                                    "Can I change my major or my campus?",
-                                    "Do you accept transfer credits from other colleges? What courses should I take if I plan to transfer to Embry-Riddle at a later date?",
-                                    "I'm taking Advanced Placement (AP) classes in high school. Will they count at Embry-Riddle?",
-                                    "I’m taking A-level Exam. Will they count at Embry-Riddle?",
-                                    "What are your Admissions office hours? How can I get a tour?",
-                                    "I am taking International Baccalaureate (IB) Exam. Will they count at Embry-Riddle?"};
+        children = new String[][]{ {"What are your admissions criteria?",
+                "When should I apply for admission?",
+                "Can I change my major or my campus?",
+                "Do you accept transfer credits from other colleges? What courses should I take if I plan to transfer to Embry-Riddle at a later date?",
+                "I'm taking Advanced Placement (AP) classes in high school. Will they count at Embry-Riddle?",
+                "I’m taking A-level Exam. Will they count at Embry-Riddle?",
+                "What are your Admissions office hours? How can I get a tour?",
+                "I am taking International Baccalaureate (IB) Exam. Will they count at Embry-Riddle?"},
 
-        sub_groups = new String[][]{
-                {"General Admission Question go here"},
-                {"University FAQs go here"},
-                {"International Student FAQ"}
+                {"What majors do you offer?",
+                        "Are the career opportunities in aviation promising?",
+                        "Do you provide assistance to your graduating students in their job search? Do you have any co-ops or internships available?",
+                        "Is the university accredited?",
+                        "How many students are enrolled at the Daytona Beach Campus? What is the student/faculty ratio?",
+                        "What will it cost to attend?",
+                        "Is financial aid available?",
+                        "Can I fly at Embry-Riddle if I am not enrolled in a flight program?",
+                        "What kind of aircraft and simulators do you have?",
+                        "Will I start flying my first year as an Aeronautical Science major?",
+                        "Is tutoring available?",
+                        "How does ROTC work?",
+                        "Do you offer housing on campus? Are cars allowed on campus?",
+                        "What kind of extracurricular activities do you offer?",
+                        "Where do students eat on campus?",
+                        "What are the University's Computer Requirements?"},
+
+                {"When should an application be submitted to Embry-Riddle Aeronautical University?",
+                        "What are the next steps after I have applied? When will I receive an admissions decision?"}
+
         };
+
     }
 
     @Override
@@ -60,7 +77,6 @@ public class faqFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         lv = (ExpandableListView) view.findViewById(R.id.questExpand);
-        //lv = (ExpandableListView) view.findViewById(R.id.subQuestExpand);       //Requires another expandable list view
         lv.setAdapter(new ExpandableListAdapter(groups, children));         //will added sub_groups
         lv.setGroupIndicator(null);
     }
@@ -72,13 +88,10 @@ public class faqFrag extends Fragment {
 
         private final LayoutInflater inf;
         private String[] groups;
-        //private String[][] sub_groups;    //attempting to implement nested expand view
-        private String[] children;
+        private String[][] children;
 
-        public ExpandableListAdapter(String[] groups, String[] children) {
-            //Inserted sub_groups String into the argument
+        public ExpandableListAdapter(String[] groups, String[][] children) {
             this.groups = groups;
-            //this.sub_groups = sub_groups;   //Attempting to create nested expand view
             this.children = children;
             inf = LayoutInflater.from(getActivity());
         }
@@ -88,16 +101,9 @@ public class faqFrag extends Fragment {
             return groups.length;
         }
 
-        //Created getSubGroupCount
-
-
         @Override
         public int getChildrenCount(int groupPosition) {
-            /*
-            Inserted int subGroupPosition into argument
-            added another [] to fill in subGroupPosition into return statement
-             */
-            return children.length;
+            return children[groupPosition].length;
         }
 
         @Override
@@ -105,18 +111,15 @@ public class faqFrag extends Fragment {
             return groups[groupPosition];
         }
 
-        //Created Object getSubGroup
-
         @Override
         public Object getChild(int groupPosition, int childPosition) {
-            return children[groupPosition];
+            return children[groupPosition][childPosition];
         }
 
         @Override
         public long getGroupId(int groupPosition) {
             return groupPosition;
         }
-        //Created subGroupPosition
 
         @Override
         public long getChildId(int groupPosition, int childPosition) {
@@ -166,11 +169,6 @@ public class faqFrag extends Fragment {
             return convertView;
         }
 
-        /*
-        * If creating a View getSubGroupView, then need
-        * subGroupPosition
-        * ViewSubGroup
-        */
 
         @Override
         public boolean isChildSelectable(int groupPosition, int childPosition) {
