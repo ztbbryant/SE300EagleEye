@@ -6,8 +6,6 @@ android:layout_height="match_parent"
 android:id="@+id/fragment_faq"
 tools:context="com.example.zacharybryant.eagleeyeapp.faqFrag">
 
-
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="100000dp"
@@ -24,7 +22,6 @@ tools:context="com.example.zacharybryant.eagleeyeapp.faqFrag">
                 android:id="@+id/questExpand"
                 android:layout_width="match_parent"
                 android:layout_height="480dp"></ExpandableListView>
-
 
         </LinearLayout>
     </ScrollView>
