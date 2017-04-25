@@ -170,7 +170,7 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     private void addResources(SQLiteDatabase centralDatabase)
     {
         Log.d("Database","Adding resources");
-
+        //Not adding to database currently
         ContentValues resourcesValues = new ContentValues();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(MainActivity.context.getResources().openRawResource(R.raw.resourcelist)));
