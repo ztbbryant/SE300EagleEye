@@ -57,7 +57,7 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     {
 
         /*
-            databaseName is obviously name of database, ID's are the names of the columns, TEXT indicates that it is a text field
+            databaseName is name of database, ID's are the names of the columns, TEXT indicates that it is a text field
             @return nothing
             @param SQLITE Database
          */
@@ -86,7 +86,6 @@ public class DatabaseCommunication extends SQLiteOpenHelper
      */
 
     /**
-     *
      * @param centralDatabase -- database we are checking version
      * @param oldVersion -- old version of database
      * @param newVersion -- next version available
@@ -94,8 +93,6 @@ public class DatabaseCommunication extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase centralDatabase, int oldVersion, int newVersion)
     {
-
-
         centralDatabase.execSQL("DROP TABLE IF EXISTS BUILDINGS");
         centralDatabase.execSQL("DROP TABLE IF EXISTS RESOURCES");
         centralDatabase.execSQL("DROP TABLE IF EXISTS FOOD");
@@ -176,12 +173,12 @@ public class DatabaseCommunication extends SQLiteOpenHelper
         BufferedReader reader = new BufferedReader(new InputStreamReader(MainActivity.context.getResources().openRawResource(R.raw.resourcelist)));
         String buffer;
         try{
-            while ((buffer=reader.readLine())!=null){
-                resourcesValues.put("NAME",buffer);
+            while ((buffer = reader.readLine()) != null) {
+                resourcesValues.put("NAME", buffer);
                 resourcesValues.put("DESCRIPTION", reader.readLine());
-                resourcesValues.put("LAT",reader.readLine());
-                resourcesValues.put("LON",reader.readLine());
-                centralDatabase.insert("RESOURCES",null,resourcesValues);
+                resourcesValues.put("LAT", reader.readLine());
+                resourcesValues.put("LON", reader.readLine());
+                centralDatabase.insert("BUILDINGS", null, resourcesValues);
             }
             reader.close();
         } catch(IOException e){Log.d("Database","Missing Resources");}
