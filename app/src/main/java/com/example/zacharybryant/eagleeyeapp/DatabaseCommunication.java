@@ -86,7 +86,6 @@ public class DatabaseCommunication extends SQLiteOpenHelper
      */
 
     /**
-     *
      * @param centralDatabase -- database we are checking version
      * @param oldVersion -- old version of database
      * @param newVersion -- next version available
