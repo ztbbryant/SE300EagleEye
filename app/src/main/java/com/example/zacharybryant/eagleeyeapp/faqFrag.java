@@ -19,7 +19,6 @@ public class faqFrag extends Fragment {
     ExpandableListView lv;
     private String[] groups;
     private String[][] children;
-    private String[][][] answers;
     //the child class is acually a 2d string
 
 
