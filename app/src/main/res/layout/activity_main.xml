@@ -8,13 +8,23 @@
     android:orientation="vertical"
     tools:context="com.example.zacharybryant.eagleeyeapp.MainActivity">
 
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </FrameLayout>
+        <ListView
+            android:id="@+id/listView2"
+            android:layout_width="385dp"
+            android:layout_height="313dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="232dp" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

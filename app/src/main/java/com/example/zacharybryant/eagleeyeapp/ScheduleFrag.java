@@ -36,7 +36,6 @@ public class ScheduleFrag extends Fragment {
         }
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();

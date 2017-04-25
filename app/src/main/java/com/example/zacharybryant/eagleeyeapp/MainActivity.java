@@ -1,5 +1,8 @@
 package com.example.zacharybryant.eagleeyeapp;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,12 +16,15 @@ import android.view.MenuItem;
  * Main activity for the application
  * @author Shawn
  * @version 1.0
-
  */
 public class MainActivity extends AppCompatActivity {
 
+
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
+    private DatabaseCommunication databaseCommunication;
+    static SQLiteDatabase db;
+    static Context context;
 
     /**
     * Listener to change active fragment
@@ -41,16 +47,15 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ScheduleFrag();
                     break;
                 case R.id.navigation_faq:
+                    fragment = new faqFrag();
                     break;
             }
 
             mSelectedItem = item.getItemId();
-
             for(int i=0;i<mBottomNav.getMenu().size();i++){
                 MenuItem menuItem = mBottomNav.getMenu().getItem(i);
                 menuItem.setChecked(menuItem.getItemId() == item.getItemId());
             }
-
 
             if(fragment!=null){
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -69,7 +74,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_main);
+        databaseCommunication = new DatabaseCommunication(this,"Database",null,1);
+        db = databaseCommunication.getReadableDatabase();
+        Log.d("DB",databaseCommunication.tableToString(db,"RESOURCES"));
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
