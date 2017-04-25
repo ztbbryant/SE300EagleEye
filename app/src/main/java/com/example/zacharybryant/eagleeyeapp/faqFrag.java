@@ -308,8 +308,6 @@ public class faqFrag extends Fragment {
 
         @Override
         public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
-
            ViewHolder holder;
             if (convertView == null) {
                 convertView = inf.inflate(R.layout.list_item, parent, false);

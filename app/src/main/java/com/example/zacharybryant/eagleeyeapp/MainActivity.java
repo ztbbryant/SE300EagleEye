@@ -19,10 +19,11 @@ import android.view.MenuItem;
  */
 public class MainActivity extends AppCompatActivity {
 
+
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
     private DatabaseCommunication databaseCommunication;
-    private SQLiteDatabase db;
+    static SQLiteDatabase db;
     static Context context;
 
     /**
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 menuItem.setChecked(menuItem.getItemId() == item.getItemId());
             }
 
-
             if(fragment!=null){
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.container,fragment,fragment.getTag());
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseCommunication = new DatabaseCommunication(this,"Database",null,1);
         db = databaseCommunication.getReadableDatabase();
-        Log.d("DB",db.toString());
+        Log.d("DB",databaseCommunication.tableToString(db,"RESOURCES"));
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

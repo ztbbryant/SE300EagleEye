@@ -1,6 +1,7 @@
 package com.example.zacharybryant.eagleeyeapp;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import com.google.android.gms.maps.MapFragment;
 
 import java.sql.Array;
 import java.util.ArrayList;
+
+import static com.example.zacharybryant.eagleeyeapp.MainActivity.db;
 
 
 /**
@@ -170,7 +173,23 @@ public class ListFrag extends Fragment {
         lv = (ExpandableListView) view.findViewById(R.id.mainList);
         lv.setAdapter(new ListFrag.ExpandableListAdapter(mainGroups, children1));         //will added sub_groups
         lv.setGroupIndicator(null);
+
+        lv.setOnChildClickListener(getChildInfo);
     }
+
+    ExpandableListView.OnChildClickListener getChildInfo =  new ExpandableListView.OnChildClickListener(){
+
+        @Override
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            Log.d("Click",children1[groupPosition][childPosition]);
+            Cursor item =  MainActivity.db.rawQuery("SELECT * FROM "+mainGroups[groupPosition].toUpperCase()+" WHERE NAME='"+children1[groupPosition][childPosition]+"'",null);
+            //Cursor c = MainActivity.db.query(mainGroups[groupPosition].toUpperCase(),new String[]{"'"+children1[groupPosition][childPosition]+"'"},"LAT",null,null,null,null);
+            item.moveToFirst();
+            Log.d("Click",item.getString(0)+"\t"+ item.getString(2)+"\t"+item.getString(3));//Can be used for map pins
+
+            return false;
+        }
+    };
 
     private class ExpandableListAdapter extends BaseExpandableListAdapter {
 

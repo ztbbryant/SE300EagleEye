@@ -6,36 +6,43 @@ android:layout_height="match_parent"
 android:id="@+id/fragment_faq"
 tools:context="com.example.zacharybryant.eagleeyeapp.faqFrag">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="100000dp"
-
-        android:paddingTop="30dp"
-        android:fillViewport="false">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:orientation="vertical">
 
-            <ExpandableListView
-                android:id="@+id/questExpand"
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="480dp"></ExpandableListView>
-
+                android:layout_height="match_parent"
+                android:text="Frequently Asked Questions"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
-    </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="Frequently Asked Questions"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ExpandableListView
+                    android:id="@+id/questExpand"
+                    android:layout_width="match_parent"
+                    android:layout_height="472dp"></ExpandableListView>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
 </FrameLayout>
