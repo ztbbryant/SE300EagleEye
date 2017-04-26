@@ -16,7 +16,13 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -29,12 +35,14 @@ import static com.example.zacharybryant.eagleeyeapp.MainActivity.db;
  * @author Shawn
  * @version 1.0
  */
-public class ListFrag extends Fragment {
+public class ListFrag extends Fragment implements OnMapReadyCallback{
 
     private OnFragmentInteractionListener mListener;
     private ExpandableListView lv;
     private String[] mainGroups;
     private String[][] children1;
+    MapView mapView;
+    GoogleMap map;
 
 
     @Override
@@ -161,6 +169,11 @@ public class ListFrag extends Fragment {
         }
         try {
             view = inflater.inflate(R.layout.fragment_list, container, false);
+
+            mapView = (MapView) view.findViewById(R.id.map);
+            mapView.onCreate(savedInstanceState);
+            mapView.getMapAsync(this);
+
         } catch (InflateException e) {}
 
         return view;
@@ -294,6 +307,14 @@ public class ListFrag extends Fragment {
         }
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // Add a marker in Sydney, Australia,
+        // and move the map's camera to the same location.
+        LatLng sydney = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Marker in Sydney"));
+    }
 
     @Override
     public void onDetach() {
@@ -305,4 +326,29 @@ public class ListFrag extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
+    @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
 }
